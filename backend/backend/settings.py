@@ -40,7 +40,6 @@ INSTALLED_APPS = [
 
     'account',
     'campaigns',
-    'petition',
     'scrapper',
 
     # 3rd party

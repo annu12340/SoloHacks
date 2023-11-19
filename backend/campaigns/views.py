@@ -1,7 +1,4 @@
 
-import json
-from .openscreen.scan_qrcode import scaninfo_main
-from .openscreen.generate_qrcode import main
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -58,9 +55,6 @@ class CampaignIdView(generics.GenericAPIView):
 
     def get(self, request, campaign_id):
         campaign = get_object_or_404(Campaign, pk=campaign_id)
-        # scanid = request.GET.get('scanId', '')
-        # print("scanid", scanid)
-        # scaninfo_main(scanid)
         serializer = self.serializer_class(instance=campaign)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -164,28 +158,6 @@ class CampaignAnalysis(generics.GenericAPIView):
     def get(self, request, campaign_id):
 
         campaign = get_object_or_404(Campaign, pk=campaign_id)
-        print("campaigncampaigncampaigncampaigncampaign", campaign)
-
-        scaninfo_main(campaign.asset_id)
-
         serializer = self.serializer_class(instance=campaign)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
-
-
-# class UpdateCampaignLikesView(generics.GenericAPIView):
-
-#     serializer_class = serializers.CampaignLikesUpdateSerializer
-
-#     def put(self, request, campaign_id):
-#         campaign = get_object_or_404(Campaign, pk=campaign_id)
-
-#         serializer = self.serializer_class(
-#             instance=campaign, data=request.data)
-
-#         if serializer.is_valid():
-#             serializer.save()
-
-#             return Response(status=status.HTTP_200_OK, data=serializer.data)
-
-#         return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)

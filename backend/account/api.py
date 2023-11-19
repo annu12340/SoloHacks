@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect
 from rest_framework import generics, status
 from rest_framework.response import Response
 from .serializer import RegisterSerializer, UserSerializer
-from twilio.rest import Client
 from django.http import HttpResponse
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
@@ -34,13 +33,6 @@ def send_otp(request):
     else:
         random_chars = generate_otp()
         print("get request", random_chars)
-        account_sid = config_account_sid
-        auth_token = config_auth_token
-        client = Client(account_sid, auth_token)
-        client.messages.create(
-            body='\n\n\n  Welcome to Together. \n Your otp is '+random_chars,
-            from_='+17622093494', to='+919188058865'
-        )
         return Response(data=random_chars, status=status.HTTP_200_OK)
 
 

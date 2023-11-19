@@ -25,7 +25,7 @@ urlpatterns = [
          name='token_refresh'),
     path('account/', include('account.urls')),
     path('campaigns/', include('campaigns.urls')),
-    path('petition/', include('petition.urls')),
+
     path("scrapper/", include("scrapper.urls")),
     path("", schema_view.with_ui("swagger", cache_timeout=0)),
 ]
